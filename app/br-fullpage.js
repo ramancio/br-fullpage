@@ -15,7 +15,8 @@
     function FullpageHref(){
         function fullpageHref($scope, $element){
             $element.css('cursor', 'pointer');
-            $element.on('click', function(){
+            $element.on('click', function () {
+                var oldId  = sessionStorage.getItem('br-fullpage-index');
                 for (var i = 0; i < pages.length; i++) {
                     if (pages[i].id == $scope.scrollTo){
                         pageIndex = i;
@@ -26,6 +27,10 @@
                 );
                 angular.element(document.getElementsByClassName('br-fullpage-nav-item')).removeClass('active');
                 angular.element(document.getElementsByClassName('br-fullpage-nav-item')[pageIndex]).addClass('active');
+                angular.element(document.getElementsByClassName('br-fullpage')[pageIndex]).addClass('active');
+                setTimeout(function () {
+                    angular.element(document.getElementsByClassName('br-fullpage')[oldId]).removeClass('active');
+                }, 1000);
                 sessionStorage.setItem('br-fullpage-index', pageIndex);
             });
         }
@@ -63,6 +68,7 @@
             //align menu in middle
             nav.style.marginTop = (0 - (pages.length * 17)) + 'px';
             angular.element(document.getElementsByClassName('br-fullpage-nav-item')[pageIndex]).addClass('active');
+            angular.element(document.getElementsByClassName('br-fullpage')[pageIndex]).addClass('active');
             angular.element(pages[0]).css(
                 'marginTop', '-' + pageHeight * pageIndex + 'px'
             );
@@ -83,6 +89,7 @@
             function paginate(delta){
                 if (!scrolling){
                     scrolling = true;
+                    var oldPage = pageIndex;
                     if (delta > 0) {
                         prevPage();
                     }
@@ -94,10 +101,11 @@
                     );
                     angular.element(document.getElementsByClassName('br-fullpage-nav-item')).removeClass('active');
                     angular.element(document.getElementsByClassName('br-fullpage-nav-item')[pageIndex]).addClass('active');
+                    angular.element(document.getElementsByClassName('br-fullpage')[pageIndex]).addClass('active');
                     sessionStorage.setItem('br-fullpage-index', pageIndex);
-
                     setTimeout(function () {
                         scrolling = false;
+                        angular.element(document.getElementsByClassName('br-fullpage')[oldPage]).removeClass('active');
                     }, 1000);
                 }
             }
