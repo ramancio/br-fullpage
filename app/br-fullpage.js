@@ -160,35 +160,6 @@
                 );
                 setHeight();
             }
-
-            //Event Bindings
-            angular.element(document).bind("mousewheel", mouseScroll); //IE9, Chrome, Safari, Opera
-            angular.element(document).bind("onmousewheel", mouseScroll); //IE 6-8
-            angular.element(document).bind("wheel", mouseScroll); //Firefox
-
-            angular.element(document).bind("touchstart", startTouch); //Mobile
-            angular.element(document).bind("pointerdown", startTouch); //Mobile
-            angular.element(document).bind("MSPointerDown", startTouch); //Mobile
-
-            angular.element(document).bind("touchmove", endTouch); //Mobile
-            angular.element(document).bind("pointermove", endTouch); //Mobile
-            angular.element(document).bind("MSPointerMove", endTouch); //Mobile
-
-            angular.element($window).bind("resize", resize);
-
-            //Event Destroy
-            $scope.$on('$destroy', function(){
-                angular.element(document).unbind("mousewheel", mouseScroll); //IE9, Chrome, Safari, Opera
-                angular.element(document).unbind("onmousewheel", mouseScroll); //IE 6-8
-                angular.element(document).unbind("wheel", mouseScroll); //Firefox
-                angular.element(document).unbind("touchstart", startTouch); //Mobile
-                angular.element(document).unbind("pointerdown", startTouch); //Mobile
-                angular.element(document).unbind("MSPointerDown", startTouch); //Mobile
-                angular.element(document).unbind("touchmove", endTouch); //Mobile
-                angular.element(document).unbind("pointermove", endTouch); //Mobile
-                angular.element(document).unbind("MSPointerMove", endTouch); //Mobile
-                angular.element($window).unbind("resize", resize);
-            });
         }
 
         return {
